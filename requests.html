@@ -1,0 +1,60 @@
+﻿<html>
+
+	<script>
+		function wyslij()
+		{
+			var request = document.getElementById('request').value.toString();
+			var path = document.getElementById('path').value.toString();
+			var rest = document.getElementById('rest').value.toString();
+
+			var http = new XMLHttpRequest();
+			
+			http.open(request, path+rest, true);
+
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			http.onreadystatechange = function() {
+				if(http.status == 200) {
+					var div = document.getElementById('res');
+					div.innerHTML = http.responseText;
+				}
+			}
+			http.send();
+			
+		}
+	</script>
+	
+	<div>
+		<h3> Piekna i prosta strona do wysyłania requesta i odbierania danych</h3>
+		<br>
+		Podaj Typ Requestu: <br><!--<input id="request" type="text" >-->
+		Create -> Post <br>
+		Read   -> Get <br>
+		Update -> Put <br>
+		Delete -> Delete <br>
+		<select id="request">
+			  <option value="GET">GET</option>
+			  <option value="POST">POST</option>
+			  <option value="PUT">PUT</option>
+			  <option value="DELETE">DELETE</option>
+		</select><br><br>
+		Wybierz scierzke API: Zrobilem tylko jeden kontroler, wiec tylko jedna scierzka, analogicznie mógł bym zrobić wiele więcej.<br>
+		<select id="path">
+			  <option value="api/people/">api/people/</option>
+		</select><br><br>
+		Reszta scierzki (np. id): <br>
+		GET -> puste pole = wszyscy ludzie : id = osoba o danym id <br>
+		POST -> id,pole1,pole2 np: 12,rafal,dzierzbinski <br>
+		PUT -> id,numerpola,nowatresc np: 12,1,lukasz (numerpola > 0)<br>
+		DELETE -> id usuw urzytkownika o danym id np: 1<br>
+		<input id="rest" type="text"><br><br>
+		
+		<button onclick="wyslij()">Zatwierdź</button>
+	</div>
+
+	<br>
+	Odpowiedź w formacje JSON:<br>
+	<div id="res">
+	<div>
+	
+</html>

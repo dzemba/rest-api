@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule ^api/([^-]+)/$ index.php?c=$1
+RewriteRule ^api/([^-]+)/(.*)$ index.php?c=$1&p=$2 [QSA]
